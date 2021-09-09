@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/auto_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="คำค้น"
+        android:completionThreshold="1"
+        />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:text="ความหมาย : "
+    android:textSize="22sp"
+    android:layout_marginTop="16dp"
+    android:scrollbars="vertical"
+    />
+<TextView
+    android:id="@+id/definition"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:textSize="22sp"
+    android:textStyle="normal"
+    />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="คำอ่านไทย :"
+    android:textStyle="bold"
+    android:textSize="22sp"
+    android:layout_marginTop="16dp"
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/spellTH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="sans-serif-thin"
+            android:padding="1dp"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+        <ImageButton
+            android:id="@+id/imgButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="TextToSpeechButton"
+            android:layout_marginLeft="250dp"
+            android:padding="16dp"
+            android:src="@android:drawable/ic_media_play" />
+    </LinearLayout>
+</LinearLayout>
