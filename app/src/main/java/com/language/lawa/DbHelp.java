@@ -1,18 +1,21 @@
-package com.example.lawa;
+package com.language.lawa;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class DbHelp<ConText> extends SQLiteOpenHelper {
+public class DbHelp  extends SQLiteOpenHelper {
 
     private static String dbName;
     private final Context context;
@@ -23,16 +26,16 @@ public class DbHelp<ConText> extends SQLiteOpenHelper {
 
 
 
-    @SuppressLint("SdCardPath")
-    public DbHelp(Context mcontext, String name, int version){
-        super(mcontext,name,null,version);
-
-        this.context = mcontext;
-        this.dbName = name;
-       this.dbPath = "/data/data/"+mcontext.getPackageName()+"/"+"databases/";
 
 
-    }
+     @SuppressLint("SdCardPath")
+     public DbHelp(Context mcontext, String name, int version){
+         super(mcontext,name,null,version);
+         this.context = mcontext;
+         this.dbName = name;
+        this.dbPath = "/data/data/"+mcontext.getPackageName()+"/"+"databases/";
+
+     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -44,15 +47,10 @@ public class DbHelp<ConText> extends SQLiteOpenHelper {
     }
     public void CheckDb(){
         SQLiteDatabase checkDb = null;
-
         try{
             String filePath = dbPath + dbName;
-
             checkDb = SQLiteDatabase.openDatabase(filePath,null,0);
-
-
         }catch (Exception e){}
-
         if(checkDb != null) {
             Log.d("checkDb", "Database already exists");
             checkDb.close();
@@ -63,7 +61,6 @@ public class DbHelp<ConText> extends SQLiteOpenHelper {
 
     public void CopyDatabase(){
         this.getReadableDatabase();
-
         try{
             InputStream is = context.getAssets().open(dbName);
             OutputStream os = new FileOutputStream(dbPath + dbName);
@@ -79,14 +76,12 @@ public class DbHelp<ConText> extends SQLiteOpenHelper {
             os.close();
         }catch (Exception e){e.printStackTrace();}
 
-        Log.d("CopyDb","Database Copied");
+        Log.d("CopyDb","Database Copied"+dbName);
     }
 
     public void OpenDatabase(){
         String filepath = dbPath + dbName;
-
         SQLiteDatabase.openDatabase(filepath,null,0);
-
     }
     //สร้างอาเรย์สำหรับเลือกคำจากตาราง
     public ArrayList<String> getWord(String query){

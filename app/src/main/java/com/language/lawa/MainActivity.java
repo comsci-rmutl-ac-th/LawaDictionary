@@ -1,4 +1,4 @@
-package com.example.lawa;
+package com.language.lawa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
     AutoCompleteTextView autoCompleteTextView;
-
     DbHelp dbHelp;
     ArrayList<String> newList;
     private   TextView textView,tvspellthai;
@@ -45,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        dbHelp = new DbHelp(this,"lawa_dictionary.db",1);
+            dbHelp = new DbHelp(this,"lawa_dictionary.db",1);
         try{
             dbHelp.CheckDb();
             dbHelp.OpenDatabase();

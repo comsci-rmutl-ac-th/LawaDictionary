@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.language.lawa;
 
 import org.junit.Test;
 
