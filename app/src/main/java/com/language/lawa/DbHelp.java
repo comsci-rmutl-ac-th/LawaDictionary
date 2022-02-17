@@ -1,5 +1,7 @@
 package com.language.lawa;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,18 +24,18 @@ public class DbHelp  extends SQLiteOpenHelper {
     private String dbPath=null;
     private String TABLE_NAME="LawaDictionary";
     private String COL_WORD="Word";
+    private SQLiteDatabase db;
 
 
-
-
-
-
-     @SuppressLint("SdCardPath")
+    @SuppressLint("SdCardPath")
      public DbHelp(Context mcontext, String name, int version){
          super(mcontext,name,null,version);
          this.context = mcontext;
          this.dbName = name;
-        this.dbPath = "/data/data/"+mcontext.getPackageName()+"/"+"databases/";
+
+         this.dbPath = "/data/data/"+mcontext.getPackageName()+"/"+"databases/";
+
+         Log.d("data",dbPath);
 
      }
     @Override
@@ -62,7 +64,8 @@ public class DbHelp  extends SQLiteOpenHelper {
     public void CopyDatabase(){
         this.getReadableDatabase();
         try{
-            InputStream is = context.getAssets().open(dbName);
+
+            InputStream is = context.getAssets().open("sqlite/"+dbName);
             OutputStream os = new FileOutputStream(dbPath + dbName);
 
             byte[] buffer = new byte[1024];
@@ -76,13 +79,15 @@ public class DbHelp  extends SQLiteOpenHelper {
             os.close();
         }catch (Exception e){e.printStackTrace();}
 
-        Log.d("CopyDb","Database Copied"+dbName);
+        Log.d("CopyDb","Database Copied "+dbName);
     }
 
     public void OpenDatabase(){
-        String filepath = dbPath + dbName;
-        SQLiteDatabase.openDatabase(filepath,null,0);
+       String filepath = dbPath + dbName;
+       SQLiteDatabase.openDatabase(filepath,null,0);
+        Log.d("TAG","Open data successed."+filepath);
     }
+
     //สร้างอาเรย์สำหรับเลือกคำจากตาราง
     public ArrayList<String> getWord(String query){
         ArrayList<String> wordList= new ArrayList<>();
